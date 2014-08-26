@@ -7,6 +7,8 @@ When I try to implement the algorithm according to the original paper, I find th
 introduce some changes in this implementation. Now it requires more care about the selection of parameters with better 
 results.
 
+## Usage
+
 To use this implementation, you should define a class extends the ComputableItem[T <: ComputableItem[T]] trait to meet 
 your needs, as follows:
 
@@ -47,14 +49,14 @@ instances. The `validate: (Int, Double) => Boolean` is the function which finds 
 
 Following are some test case results:
 
-### Result of Aggregation:
+### Result of Aggregation
 
 ![Aggregation](agg.jpg)
 
-### Result of Spiral:
+### Result of Spiral
 
 ![Spiral](spi.jpg)
 
-### Result of D31:
+### Result of D31
 
 ![D31](d31.jpg)
