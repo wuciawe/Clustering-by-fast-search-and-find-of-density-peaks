@@ -13,7 +13,7 @@ import scala.util.control.Breaks._
  * At 下午3:49
  */
 class FastCluster[T <: ComputableItem[T]]() {
-  def computeRhoDelta(list: List[T], threshold: Double, flag: Boolean, MN: Int = Runtime.getRuntime.availableProcessors()): List[(String, Int, Double)] = {
+  def computeRhoDelta(list: List[T], threshold: Double, flag: Boolean = false, MN: Int = Runtime.getRuntime.availableProcessors()): List[(String, Int, Double)] = {
     def getDistance(): Double = {
       val nSamples = list.size
       val nLow = 0.016 * nSamples * nSamples
