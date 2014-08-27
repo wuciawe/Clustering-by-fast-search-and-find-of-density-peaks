@@ -52,17 +52,17 @@ object Test {
     val fc = new FastCluster[myItem]()
     val clusters = fc.cluster(input, threshold, fn)
     val pw = new PrintWriter(new FileWriter("result", false))
-    pw.println(clusters.map(_.mkString(",")).mkString("\n"))
+    pw.println(clusters.mkString("\n"))
     pw.close()
   }
 
   def main(args: Array[String]) {
 
-    computeRhoDelta(2.5, "spiral.txt")
-    cluster(2.5, (rho: Int, delta: Double) => rho > 15 && delta > 5)
+//    computeRhoDelta(2.5, "spiral.txt")
+//    cluster(2.5, (rho: Int, delta: Double) => rho > 15 && delta > 5)
 
-//    computeRhoDelta(2, "Aggregation.txt")
-//    cluster(6, (rho: Int, delta: Double) => delta > 6)
+    computeRhoDelta(2, "Aggregation.txt")
+    cluster(6, (rho: Int, delta: Double) => delta > 6)
 
 //    computeRhoDelta(2.5, "D31.txt")
 //    cluster(2, (rho: Int, delta: Double) => rho > 1 && delta > 2)
