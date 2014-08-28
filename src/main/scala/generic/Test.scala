@@ -58,11 +58,11 @@ object Test {
 
   def main(args: Array[String]) {
 
-//    computeRhoDelta(2.5, "spiral.txt")
-//    cluster(2.5, (rho: Int, delta: Double) => rho > 15 && delta > 5)
+    computeRhoDelta(2.5, "spiral.txt")
+    cluster(2.5, (rho: Int, delta: Double) => rho > 15 && delta > 5)
 
-    computeRhoDelta(2, "Aggregation.txt")
-    cluster(6, (rho: Int, delta: Double) => delta > 6)
+//    computeRhoDelta(2, "Aggregation.txt")
+//    cluster(0, (rho: Int, delta: Double) => delta > 6)
 
 //    computeRhoDelta(2.5, "D31.txt")
 //    cluster(2, (rho: Int, delta: Double) => rho > 1 && delta > 2)

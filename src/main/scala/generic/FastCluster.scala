@@ -44,7 +44,8 @@ class FastCluster[T <: ComputableItem[T]](val MN: Int = Runtime.getRuntime.avail
     val th = if (flag) getDistance() else threshold
     val resList = new mutable.ListBuffer[(String, Int, Double)]
 
-    class FooActor extends Actor {
+    val system = ActorSystem()
+    system.actorOf(Props(new Actor {
 
       case object GiMeWork
 
@@ -146,10 +147,7 @@ class FastCluster[T <: ComputableItem[T]](val MN: Int = Runtime.getRuntime.avail
             context.system.shutdown()
           }
       }
-    }
-
-    val system = ActorSystem()
-    system.actorOf(Props(new FooActor))
+    }))
     system.awaitTermination()
     resList.toList
   }
@@ -169,7 +167,8 @@ class FastCluster[T <: ComputableItem[T]](val MN: Int = Runtime.getRuntime.avail
     }
     var cn = 0
     var res = List.empty[(T, Int)]
-    class FooActor extends Actor {
+    val system = ActorSystem()
+    system.actorOf(Props(new Actor {
 
       case object GiMeWork
 
@@ -216,7 +215,6 @@ class FastCluster[T <: ComputableItem[T]](val MN: Int = Runtime.getRuntime.avail
               cn += 1
               res = (ele, cn) :: res
             }
-            context become InitState(data, list, jn)
           } else context become InitState((ele, rho) :: data, list, jn)
         case GiMeWork =>
           if (list.nonEmpty) {
@@ -246,7 +244,7 @@ class FastCluster[T <: ComputableItem[T]](val MN: Int = Runtime.getRuntime.avail
       }
 
       def ComputeState(remainSet: Set[T], rhoSet: Set[T], rhoSetList: List[Set[T]], minDist: Double, idx: Int, ele: T, jn: Int): Receive = {
-        case ComputeResult(e: T, d: Double, i: Int) =>
+        case ComputeResult(e, d, i) =>
           if (d < minDist) context become (ComputeState(remainSet, rhoSet, rhoSetList, d, i, e, jn), discardOld = true)
         case GiMeWork =>
           if (remainSet.nonEmpty) {
@@ -276,9 +274,7 @@ class FastCluster[T <: ComputableItem[T]](val MN: Int = Runtime.getRuntime.avail
             context.system.shutdown()
           }
       }
-    }
-    val system = ActorSystem()
-    system.actorOf(Props(new FooActor))
+    }:Actor))
     system.awaitTermination()
     res.map(x => s"${x._1.toString},${x._2}")
   }
